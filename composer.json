@@ -1,0 +1,16 @@
+{
+    "name":"melu-nnea-dev/ws03",
+    "description":"job listing using vanilla PHP",
+    "authors":[
+        {
+            "name":"Meluin Palaris",
+            "email":"mpalaris0123@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\":"Framework/",
+            "App\\":"App/"
+        }
+    }
+}
