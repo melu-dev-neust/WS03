@@ -1,3 +1,0 @@
-<?php
-viewPartials('listings/create');
-?>
