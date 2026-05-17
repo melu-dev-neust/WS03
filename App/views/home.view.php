@@ -48,5 +48,4 @@
 
 
     <?= loadPartials('bottom-banner') ?>
-    <?= loadPartials('footer') ?>
 

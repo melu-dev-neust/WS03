@@ -62,4 +62,3 @@
     </section>
 
     <?= loadPartials('bottom-banner') ?>
-    <?= loadPartials('footer') ?>
