@@ -1,6 +1,3 @@
-<?php
-echo "this is create view";
-?>
 
     <?= loadPartials('head') ?>  
     <?= loadPartials('navbar') ?>
@@ -134,3 +131,4 @@ echo "this is create view";
       </div>
     </section>
     <?=loadPartials('bottom-banner')?>
+    <?=loadPartials('footer')?>

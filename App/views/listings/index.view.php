@@ -1,5 +1,5 @@
 <?php
-echo "this is listing index view";
+//echo "this is listing index view";
 ?>
     <?=loadPartials('head')?>
     <body class="bg-gray-100">
@@ -9,7 +9,15 @@ echo "this is listing index view";
     <!-- Job Listings -->
     <section>
         <div class="container mx-auto p-4 mt-4">
-        <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">All Jobs</div>
+        <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">
+          <?php if (isset($keywords)):?>
+            Search Results for: <?=htmlspecialchars($keywords)?>
+          <?php else:?>
+            All jobs
+          <?php endif;?>
+          
+        
+        </div>
 
         <?=loadPartials('message')?>
         
