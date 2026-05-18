@@ -1,12 +1,13 @@
 <?php
     namespace Framework;
     use App\Controllers\ErrorController;
+    use Framework\Middleware\Authorize;
 
     class Router {
         protected $routes=[];
 
         /**ask what type of request*/
-        public function setRoute($method, $uri, $action){
+        public function setRoute($method, $uri, $action, $middleware=[]){
             list($controller,$controllerMethod) = explode('@',$action);
         
 
@@ -14,27 +15,34 @@
                 'method'=>$method,
                 'uri'=>$uri,
                 'controller'=>$controller,
-                'controllerMethod'=>$controllerMethod    
+                'controllerMethod'=>$controllerMethod,    
+                'middleware'=>$middleware 
             ];
         }
         
     
-        public function get($uri, $controller){
-            $this->setRoute('GET',$uri,$controller);
+        public function get($uri, $controller, $middleware=[]){
+            $this->setRoute('GET',$uri,$controller,$middleware);
         }
-        public function post($uri, $controller){
-            $this->setRoute('POST',$uri,$controller);
+        public function post($uri, $controller,$middleware=[]){
+            $this->setRoute('POST',$uri,$controller,$middleware);
         }
-        public function put($uri, $controller){
-            $this->setRoute('PUT',$uri,$controller);
+        public function put($uri, $controller,$middleware=[]){
+            $this->setRoute('PUT',$uri,$controller,$middleware);
         }
-        public function delete($uri, $controller){
-            $this->setRoute('DELETE',$uri,$controller);
+        public function delete($uri, $controller,$middleware=[]){
+            $this->setRoute('DELETE',$uri,$controller,$middleware);
         }
 
         /**Route the request */
         public function route($uri){
             $requestMethod = $_SERVER['REQUEST_METHOD'];
+            
+            //check for  _method input
+            if($requestMethod === 'POST' && isset($_POST['_method'])){
+                // override the request method with the value of _method
+                $requestMethod = strtoupper($_POST['_method']);
+            }
             foreach($this->routes as $route){
                 //Split the current URI into segments
                 $uriSegments = explode('/',trim($uri,'/'));
@@ -58,6 +66,10 @@
                         }
                     }
                     if($match){
+                        foreach($route['middleware'] as $middleware){
+                            (new Authorize())->handle($middleware);
+
+                        }
                               //extract controller and controller method
                         $controller = 'App\\Controllers\\'.$route['controller'];
                         $controllerMethod = $route['controllerMethod'];

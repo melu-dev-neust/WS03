@@ -30,16 +30,20 @@ function viewPartials($name, $data = []){
 }
 
 
-function loadPartials($name){
+function loadPartials($name, $data = []){
     $partialPath = basePath("App/views/partials/{$name}.php");
     
     if(file_exists($partialPath)){
+        extract($data);
         require $partialPath;
     }else{
         echo "Partial {$name} not found :(";
     }
 }
 
+function formatSalary($salary){
+    return '$'.number_format(floatval($salary));
+}
 
 function inspect($value){
     echo '<pre>';
@@ -47,12 +51,32 @@ function inspect($value){
     echo '</pre>';
 }
 
-function formatSalary($salary){
-    return '$'.number_format(floatval($salary));
+function inspectAndDie($value){
+    echo'<pre>';
+    die(var_dump($value));
+    echo'</pre>';
 }
 
+/**
+ * Sanitize Data
+ * 
+ * @param string $dirty
+ * 
+ * return string 
+ */
+function sanitize($dirty){
+    return filter_var(trim($dirty), FILTER_SANITIZE_SPECIAL_CHARS);
+}
 
-
-
+/**
+ * Redirect to a given URL
+ * 
+ * @param string $url
+ * 
+ * return void
+ */
+function redirect($url){
+    header("Location: {$url}");
+}
 
 ?>

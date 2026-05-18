@@ -1,0 +1,33 @@
+<?php
+namespace Framework\Middleware;
+use Framework\Session;
+
+class Authorize{
+    /**
+     * Check if user is authenticated
+     * return bool
+     */
+    public function isAuth(){
+        return Session::has('user');
+    }
+    /**
+     * handle the user request
+     * @param string $role
+     * return bool
+     */
+    public function handle($role){
+        if($role==='guest'&&$this->isAuth()){
+            return redirect('/');
+            
+        }elseif($role==='auth'&&!$this->isAuth()){
+            return redirect('/auth/login');
+        }
+    }
+
+
+
+
+
+
+}
+?>
