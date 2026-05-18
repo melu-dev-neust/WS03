@@ -59,7 +59,7 @@ class Session{
             unset($_SESSION[$key]);
         }
     }
-      /**
+    /**
      * Clear clear all session data
      * 
      * return void
@@ -67,6 +67,26 @@ class Session{
     public static function clearAll(){
         session_unset();
         session_destroy();
+    }
+     /**
+     * Set a flash message
+     * @param string $key
+     * #param string $message
+     * return void
+     */
+    public static function setFlashMsg($key,$message){
+        self::set('flash_'.$key, $message);
+    }
+    /**
+     * get a flash message and unset
+     * @param string $key
+     * #param mixed $default
+     * return void
+     */
+    public static function getFlashMsg($key,$default=null){
+        $message = self::get('flash_'.$key,$default);
+        self::clear('flash_'.$key);
+        return $message;
     }
 
 }
