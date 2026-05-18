@@ -25,17 +25,17 @@
    ---------------------------------------------------------------- */
 
 :root {
-  --color-header:       #221635;   /* Deep navy header */
-  --color-accent:       hsl(258 89.1% 64.3%);   /* Vibrant violet accent */
-  --color-page-bg:      hsla(258, 20%, 95%, 1);   /* Soft gray background */
-  --color-card-bg:      #FFFFFF;   /* Clean white cards */
-  --color-heading:      #F9FAFB;   /* Bright headings */
-  --color-body-text:    #1F2937;   /* Slate body text */
-  --color-link:         #7C3AED;   /* Purple links */
-  --color-tag-bg:       hsl(258 89.1% 64.3%);   /* Indigo tags */
-  --color-tag-text:     #FFFFFF;   /* White tag text */
-  --color-footer:       #0F172A;   /* Dark footer */
-  --showcase-overlay:   rgba(17, 24, 39, 0.70); /* Hero banner overlay
+  --color-header:       #014565;   /* Header at navigation bar */
+  --color-accent:       #0288D1;   /* "Post a Job" button at mga highlight */
+  --color-page-bg:      #FFFFFF;   /* Background ng buong page */
+  --color-card-bg:      #FFFFFF;   /* Background ng mga card/box */
+  --color-heading:      #FFFFFF;   /* Kulay ng mga title at heading */
+  --color-body-text:    #212121;   /* Regular na body text */
+  --color-link:         #47548e;   /* Mga clickable na links */
+  --color-tag-bg:       #03A9F4;   /* Background ng mga tag/badge */
+  --color-tag-text:     #FFFFFF;   /* Text ng mga tag/badge */
+  --color-footer:       #000000;   /* Footer background */
+  --showcase-overlay:   rgba(0, 0, 0, 0.5); /* Hero banner overlay
                                                 0.0 = transparent
                                                 0.9 = halos itim */
 }
@@ -79,8 +79,10 @@
    ---------------------------------------------------------------- */
 
 :root {
-  --border-radius: 14px;
-  --card-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+  --border-radius: 8px;
+  --card-shadow:  0 2px 2px 0 rgba(0,0,0,0.14),
+                  0 3px 1px -2px rgba(0,0,0,0.12),
+                  0 1px 5px 0 rgba(0,0,0,0.20);
 }
 
 
