@@ -3,6 +3,7 @@ namespace App\Controllers;
 use Framework\Database;
 use Framework\Validation;
 use Framework\Session;
+use Framework\Authorization;
 
 class ListingsController{
     
@@ -15,7 +16,7 @@ class ListingsController{
     
     public function index(){
         
-        $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
+        $listings = $this->db->query('SELECT * FROM listings ORDER BY created_at DESC')->fetchAll();
         viewPartials('listings/index',['k_listings'=>$listings]);
     }
 
@@ -119,10 +120,18 @@ class ListingsController{
             'id'=>$id
         ];
         $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
+
+        //Check if listing exist
         if(!$listing){
             ErrorController::notFound('Listing not found :(');
             return;
         }
+        //Authorization
+        if(!Authorization::isOwner($listing->user_id)){
+            $_SESSION['error_message']='You are not authorize to delete this listing';
+            return redirect('/listings/'.$listing->id);
+        }
+
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
 
         //set flash message
