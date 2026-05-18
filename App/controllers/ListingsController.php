@@ -53,7 +53,8 @@ class ListingsController{
             ,'email','requirements','benefits'
         ];
         $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
-        inspectAndDie(Session::get('user'));
+        
+        // inspectAndDie(Session::get('user'));
         
         $newListingData['user_id'] = Session::get('user')['id'];  
 

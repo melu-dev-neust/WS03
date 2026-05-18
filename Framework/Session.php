@@ -8,7 +8,7 @@ class Session{
     *return void
     */ 
     public static function start(){
-        if(session_status()==PHP_SESSION_NONE){
+        if(session_status() == PHP_SESSION_NONE){
             session_start();
         }
     }
@@ -21,6 +21,9 @@ class Session{
      * return void
      */
     public static function set($key, $value){
+        echo '<script>';
+        echo 'console.log(' . json_encode($value) . ')';
+        echo '</script>';
         $_SESSION[$key] = $value;
     }
     /**

@@ -152,7 +152,7 @@ class UserController {
                 exit;
             }
         //check if password is correct
-            if(!password_verify($password,$user->pasword)){
+            if(!password_verify($password,$user->password)){
                 if(!$password){
                 $errors['password'] = 'Incorrect credentialsss';
                 viewPartials('users/login',[
@@ -163,12 +163,13 @@ class UserController {
         }
         //set user session
         Session::set('user',[
-            'id'=>$user->Id,
+            'id'=>$user->id,
             'name'=>$user->name,
             'email'=>$user->email,
             'city'=>$user->city,
             'state'=>$user->state
         ]);
+        // inspectAndDie(Session::get('user'));
         redirect('/');
         // inspectAndDie('login');
     }
